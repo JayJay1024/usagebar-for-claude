@@ -4,20 +4,34 @@
 
 在 macOS 菜单栏显示 Claude 套餐的用量，包括**当前会话**（5 小时窗口）和**本周**两项，每项都有已用百分比和重置时间。数据和 Claude 用量设置页里看到的一致。
 
-<p>
-  <img src="docs/images/menubar.png" width="99" alt="菜单栏中的 UsageBar，显示 3% · 71%">
-</p>
-<p>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/menu-dark.png">
-    <img src="docs/images/menu-light.png" width="272" alt="UsageBar 下拉菜单，显示会话和本周用量、进度条及重置时间">
-  </picture>
-</p>
+```
+◔ 11% · 71%
+├─ Current session  11% used
+│  █░░░░░░░░░
+│  Resets 04:40 (in 1h 59m)
+├─ This week  71% used
+│  ███████░░░
+│  Resets Sat 15:00 (in 3d 12h)
+└─ Refresh · Open claude.ai usage page
+```
 
 任意一项用量达到 75% 时菜单栏文字变橙色，达到 90% 时变红色。点击任意用量行即可刷新。
 
 > [!IMPORTANT]
 > UsageBar 是**非官方**的社区项目，和 Anthropic 没有任何关联，也没有得到 Anthropic 的认可或支持。它用到的是未公开文档的接口，随时可能变化或失效。
+
+## 截图
+
+### 菜单栏
+
+<img src="docs/images/menubar.png" width="110" alt="菜单栏中的 UsageBar，显示 3% · 71%">
+
+### 下拉菜单
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/menu-dark.png">
+  <img src="docs/images/menu-light.png" width="272" alt="UsageBar 下拉菜单，显示会话和本周用量、进度条及重置时间">
+</picture>
 
 ## 环境要求
 
