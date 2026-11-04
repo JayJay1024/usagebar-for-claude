@@ -47,5 +47,12 @@ for f in normal.json high.json nulls.json unknown-reset.json; do
   else pass=$((pass + 1)); fi
 done
 
+# xbar-plugins requires these metadata tags (they also feed SwiftBar's Get Plugins screen).
+for tag in title version author author.github desc image dependencies abouturl; do
+  if grep -q "<xbar.$tag>.*</xbar.$tag>" "$PLUGIN"; then pass=$((pass + 1))
+  else failed=$((failed + 1)); echo "FAIL metadata: missing <xbar.$tag>"; fi
+done
+[ -x "$PLUGIN" ] && pass=$((pass + 1)) || { failed=$((failed + 1)); echo "FAIL plugin is not executable"; }
+
 echo "passed: $pass, failed: $failed"
 [ "$failed" -eq 0 ]
