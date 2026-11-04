@@ -12,10 +12,10 @@
 ├─ This week  71% used
 │  ███████░░░
 │  Resets Sat 15:00 (in 3d 12h)
-└─ Updated 02:40 · Refresh · Open claude.ai usage page
+└─ Refresh · Open claude.ai usage page
 ```
 
-用量达到 75% 时菜单栏文字变橙色，达到 90% 时变红色。
+任意一项用量达到 75% 时菜单栏文字变橙色，达到 90% 时变红色。点击任意用量行即可刷新。
 
 > [!IMPORTANT]
 > UsageBar 是**非官方**的社区项目，和 Anthropic 没有任何关联，也没有得到 Anthropic 的认可或支持。它用到的是未公开文档的接口，随时可能变化或失效。

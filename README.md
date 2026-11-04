@@ -12,10 +12,10 @@ Shows your Claude plan usage in the macOS menu bar: the **current session** (5-h
 ├─ This week  71% used
 │  ███████░░░
 │  Resets Sat 15:00 (in 3d 12h)
-└─ Updated 02:40 · Refresh · Open claude.ai usage page
+└─ Refresh · Open claude.ai usage page
 ```
 
-The menu bar text turns orange at 75% and red at 90%.
+The menu bar text turns orange when either value reaches 75% and red at 90%. Click any usage row to refresh.
 
 > [!IMPORTANT]
 > UsageBar is an **unofficial** community project. It is not affiliated with, endorsed by, or supported by Anthropic. It relies on an undocumented API that may change or stop working at any time.
