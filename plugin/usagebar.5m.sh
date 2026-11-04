@@ -30,7 +30,6 @@ set -u
 readonly API_URL="https://api.anthropic.com/api/oauth/usage"
 readonly USAGE_PAGE="https://claude.ai/settings/usage"
 readonly KEYCHAIN_SERVICE="${USAGEBAR_KEYCHAIN_SERVICE:-Claude Code-credentials}"
-readonly MUTED="#8E8E93"
 
 # SwiftBar/xbar run plugins with a minimal PATH, so look in the usual places.
 find_jq() {
@@ -46,7 +45,7 @@ fail() {
   echo "UsageBar ⚠︎"
   echo "---"
   echo "$1"
-  [ -n "${2:-}" ] && echo "$2 | color=$MUTED"
+  [ -n "${2:-}" ] && echo "$2"
   echo "---"
   echo "Refresh | refresh=true"
   echo "Open claude.ai usage page | href=$USAGE_PAGE"
@@ -122,30 +121,35 @@ def shown: if . == null then "–" else "\(.)%" end;
 def color($p): if $p == null then null elif $p >= 90 then "#FF453A" elif $p >= 75 then "#FF9F0A" else null end;
 def bar($p): if $p == null then rep("░"; 10)
   else ([[($p / 10 | round), 10] | min, 0] | max) as $f | rep("█"; $f) + rep("░"; 10 - $f) end;
+def colorparam($p): color($p) // "" | if . == "" then "" else " color=" + . end;
+# Lines with an action (refresh=true) render as enabled items in the primary label color.
+# Lines without one render as disabled items in the system secondary color, which adapts
+# to whatever is behind the translucent menu. Never hard-code a gray here: it becomes
+# unreadable when the menu sits over a dark window.
 def section($label; $w; $fmt):
   ($w.utilization | pct) as $p
   | ($w.resets_at | epoch | if . == null then null else ((. + 30) / 60 | floor) * 60 end) as $t
-  | "\($label)  \($p | shown) used | size=13" + (color($p) // "" | if . == "" then "" else " color=" + . end),
-    "\(bar($p)) | font=Menlo size=12" + (color($p) // "" | if . == "" then "" else " color=" + . end),
-    (if $t == null then "Reset time unknown | size=12 color=\($muted)"
-     else "Resets \($t | strflocaltime($fmt)) (in \(rel(($t - $now) | floor))) | size=12 color=\($muted)" end);
+  | "\($label)  \($p | shown) used | size=13 refresh=true" + colorparam($p),
+    "\(bar($p)) | font=Menlo size=12 refresh=true" + colorparam($p),
+    (if $t != null then "Resets \($t | strflocaltime($fmt)) (in \(rel(($t - $now) | floor))) | size=12"
+     elif ($p // 0) == 0 then "No active session | size=12"
+     else "Reset time unknown | size=12" end);
 
 (.five_hour.utilization | pct) as $s
 | (.seven_day.utilization | pct) as $w
 | ([$s, $w] | map(select(. != null)) | max) as $top
-| "\($s | shown) · \($w | shown) | sfimage=gauge.medium" + (color($top) // "" | if . == "" then "" else " color=" + . end),
+| "\($s | shown) · \($w | shown) | sfimage=gauge.medium" + colorparam($top),
   "---",
   section("Current session"; .five_hour; "%H:%M"),
   "---",
   section("This week"; .seven_day; "%a %H:%M"),
   "---",
-  "Updated \($now | strflocaltime("%H:%M")) | size=11 color=\($muted)",
   "Refresh | refresh=true",
   "Open claude.ai usage page | href=\($page)"
 '
 
 OUT="$(printf '%s' "$BODY" | "$JQ" -r \
-  --argjson now "$NOW" --arg muted "$MUTED" --arg page "$USAGE_PAGE" \
+  --argjson now "$NOW" --arg page "$USAGE_PAGE" \
   "$RENDER" 2>/dev/null)" || fail "Unexpected response from the usage API" "The API may have changed — check for a UsageBar update"
 [ -n "$OUT" ] || fail "Empty response from the usage API"
 printf '%s\n' "$OUT"

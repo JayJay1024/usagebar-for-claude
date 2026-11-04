@@ -17,26 +17,35 @@ expect() { # name, output, expected line (exact match)
 
 out="$(run normal.json)"
 expect normal-title "$out" "11% · 71% | sfimage=gauge.medium"
-expect normal-session "$out" "Current session  11% used | size=13"
-expect normal-bar "$out" "███████░░░ | font=Menlo size=12"
-expect normal-session-reset "$out" "Resets 20:40 (in 2h 00m) | size=12 color=#8E8E93"
-expect normal-week-reset "$out" "Resets Sat 07:00 (in 3d 12h) | size=12 color=#8E8E93"
+expect normal-session "$out" "Current session  11% used | size=13 refresh=true"
+expect normal-bar "$out" "███████░░░ | font=Menlo size=12 refresh=true"
+expect normal-session-reset "$out" "Resets 20:40 (in 2h 00m) | size=12"
+expect normal-week-reset "$out" "Resets Sat 07:00 (in 3d 12h) | size=12"
 
 out="$(run high.json)"
 expect high-title-red "$out" "95% · 78% | sfimage=gauge.medium color=#FF453A"
-expect high-week-orange "$out" "This week  78% used | size=13 color=#FF9F0A"
-expect high-minutes "$out" "Resets 19:05 (in 25m) | size=12 color=#8E8E93"
+expect high-week-orange "$out" "This week  78% used | size=13 refresh=true color=#FF9F0A"
+expect high-minutes "$out" "Resets 19:05 (in 25m) | size=12"
 
 out="$(run nulls.json)"
 expect nulls-title "$out" "– · 0% | sfimage=gauge.medium"
-expect nulls-empty-bar "$out" "░░░░░░░░░░ | font=Menlo size=12"
-expect nulls-unknown-reset "$out" "Reset time unknown | size=12 color=#8E8E93"
+expect nulls-empty-bar "$out" "░░░░░░░░░░ | font=Menlo size=12 refresh=true"
+expect nulls-no-session "$out" "No active session | size=12"
+
+out="$(run unknown-reset.json)"
+expect unknown-reset "$out" "Reset time unknown | size=12"
 
 out="$(run malformed.json)"
 expect malformed "$out" "Unexpected response from the usage API"
 
 out="$(USAGEBAR_KEYCHAIN_SERVICE="usagebar-test-missing-item" "$PLUGIN")"
 expect missing-credentials "$out" "Claude Code credentials not found"
+
+# A hard-coded gray is unreadable when the translucent menu sits over a dark window.
+for f in normal.json high.json nulls.json unknown-reset.json; do
+  if run "$f" | grep -q 'color=#8E8E93'; then failed=$((failed + 1)); echo "FAIL no-hardcoded-gray ($f)"
+  else pass=$((pass + 1)); fi
+done
 
 echo "passed: $pass, failed: $failed"
 [ "$failed" -eq 0 ]
