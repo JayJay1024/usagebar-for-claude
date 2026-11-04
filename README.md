@@ -4,16 +4,15 @@ English | [简体中文](README.zh-CN.md)
 
 Shows your Claude plan usage in the macOS menu bar: the **current session** (5-hour window) and **this week**, each with its percentage used and reset time. These are the numbers from Claude's usage settings page.
 
-```
-◔ 11% · 71%
-├─ Current session  11% used
-│  █░░░░░░░░░
-│  Resets 04:40 (in 1h 59m)
-├─ This week  71% used
-│  ███████░░░
-│  Resets Sat 15:00 (in 3d 12h)
-└─ Refresh · Open claude.ai usage page
-```
+<p>
+  <img src="docs/images/menubar.png" width="99" alt="UsageBar in the menu bar showing 3% · 71%">
+</p>
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/menu-dark.png">
+    <img src="docs/images/menu-light.png" width="272" alt="UsageBar dropdown menu with session and weekly usage, progress bars and reset times">
+  </picture>
+</p>
 
 The menu bar text turns orange when either value reaches 75% and red at 90%. Click any usage row to refresh.
 
