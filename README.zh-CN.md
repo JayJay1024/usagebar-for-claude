@@ -24,13 +24,13 @@
 
 ### 菜单栏
 
-<img src="docs/images/menubar.png" width="110" alt="菜单栏中的 UsageBar，显示 3% · 71%">
+<img src="docs/images/menubar.png" width="99" alt="菜单栏中的 UsageBar，显示 4% · 71%">
 
 ### 下拉菜单
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/menu-dark.png">
-  <img src="docs/images/menu-light.png" width="272" alt="UsageBar 下拉菜单，显示会话和本周用量、进度条及重置时间">
+  <img src="docs/images/menu-light.png" width="226" alt="UsageBar 下拉菜单，显示会话和本周用量、进度条及重置时间">
 </picture>
 
 ## 环境要求
