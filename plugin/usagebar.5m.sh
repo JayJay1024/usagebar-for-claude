@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # <xbar.title>UsageBar</xbar.title>
-# <xbar.version>v0.1.0</xbar.version>
+# <xbar.version>v0.1.1</xbar.version>
 # <xbar.author>JayJay1024</xbar.author>
 # <xbar.author.github>JayJay1024</xbar.author.github>
-# <xbar.desc>Shows Claude session (5h) and weekly usage plus reset times in the menu bar. Unofficial, not affiliated with Anthropic.</xbar.desc>
-# <xbar.dependencies>jq,curl</xbar.dependencies>
+# <xbar.desc>Shows your Claude plan usage (current 5-hour session and this week) with reset times. A single read-only bash script: reads Claude Code's OAuth token from the Keychain without ever refreshing or writing it, and only talks to api.anthropic.com. Unofficial, not affiliated with Anthropic.</xbar.desc>
+# <xbar.image>https://raw.githubusercontent.com/JayJay1024/usagebar-for-claude/v0.1.0/docs/images/menu-light.png</xbar.image>
+# <xbar.dependencies>bash,curl,jq,Claude Code (signed in)</xbar.dependencies>
 # <xbar.abouturl>https://github.com/JayJay1024/usagebar-for-claude</xbar.abouturl>
+# <xbar.var>string(USAGEBAR_KEYCHAIN_SERVICE="Claude Code-credentials"): Keychain item that holds the Claude Code credentials.</xbar.var>
 # <swiftbar.hideRunInTerminal>true</swiftbar.hideRunInTerminal>
 # <swiftbar.hideDisablePlugin>true</swiftbar.hideDisablePlugin>
 #
