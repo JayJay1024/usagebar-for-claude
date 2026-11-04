@@ -24,13 +24,13 @@ The menu bar text turns orange when either value reaches 75% and red at 90%. Cli
 
 ### Menu bar
 
-<img src="docs/images/menubar.png" width="110" alt="UsageBar in the menu bar showing 3% · 71%">
+<img src="docs/images/menubar.png" width="99" alt="UsageBar in the menu bar showing 4% · 71%">
 
 ### Dropdown menu
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/menu-dark.png">
-  <img src="docs/images/menu-light.png" width="272" alt="UsageBar dropdown menu with session and weekly usage, progress bars and reset times">
+  <img src="docs/images/menu-light.png" width="226" alt="UsageBar dropdown menu with session and weekly usage, progress bars and reset times">
 </picture>
 
 ## Requirements
