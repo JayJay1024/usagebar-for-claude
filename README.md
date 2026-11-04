@@ -94,6 +94,8 @@ Optional environment variables:
 | `USAGEBAR_KEYCHAIN_SERVICE` | `Claude Code-credentials` | Keychain item to read |
 | `USAGEBAR_JQ` | auto-detected | Path to `jq` |
 
+In xbar, `USAGEBAR_KEYCHAIN_SERVICE` can also be changed from the plugin's settings screen.
+
 ## Development
 
 ```sh

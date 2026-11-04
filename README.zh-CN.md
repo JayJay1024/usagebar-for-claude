@@ -94,6 +94,8 @@ UsageBar 用到的 token 拥有访问你 Claude 账号的权限，所以它遵�
 | `USAGEBAR_KEYCHAIN_SERVICE` | `Claude Code-credentials` | 要读取的钥匙串条目 |
 | `USAGEBAR_JQ` | 自动检测 | `jq` 的路径 |
 
+在 xbar 中，也可以在插件的设置界面里修改 `USAGEBAR_KEYCHAIN_SERVICE`。
+
 ## 开发
 
 ```sh
